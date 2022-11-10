@@ -1,0 +1,21 @@
+# Common CMake build directories
+build/
+out/
+cmake-build-*/
+
+# User settings
+CMakeUserPresets.json
+.vs/
+.idea/
+.vscode/
+!.vscode/extensions.json
+
+# macOS hidden files
+.DS_Store
+.AppleDouble
+._*
+
+# GCOV files
+*.gcda
+*.gcno
+*.gcov
