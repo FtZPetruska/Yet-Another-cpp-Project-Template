@@ -37,13 +37,9 @@ jobs:
           echo $PATH > $GITHUB_PATH
           echo "$(brew --prefix binutils)/bin" >> $GITHUB_PATH
 
-      - name: Update brew packages
-        run: |
-          brew update
-          brew upgrade
-
       - name: Install dependencies
         run: |
+          brew update
           brew install cmake \
                        ninja \
                        gcc \
@@ -125,7 +121,6 @@ jobs:
             -T ${{ matrix.toolchain }} `
             -A ${{ matrix.architecture }} `
             -DCMAKE_BUILD_TYPE="${{ matrix.build_type }}" `
-            -DMYPROJECT_ENABLE_ADDRESS_SANITIZER=ON `
             -DMYPROJECT_ENABLE_CLANG_TIDY=ON `
             -DMYPROJECT_ENABLE_CLANG_FORMAT=OFF `
             -DMYPROJECT_ENABLE_TESTS=ON

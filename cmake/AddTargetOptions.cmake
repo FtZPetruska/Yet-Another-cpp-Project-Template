@@ -12,6 +12,7 @@ function(set_target_options _TARGET)
 
   if(MYPROJECT_ENABLE_ADDRESS_SANITIZER AND HAVE_ADDRESS_SANITIZER)
     list(APPEND ENABLED_SANITIZERS "address")
+    message(WARNING "All dependencies must be compiled with address sanitizer enabled.")
   endif()
 
   if(MYPROJECT_ENABLE_THREAD_SANITIZER AND HAVE_THREAD_SANITIZER)
@@ -51,8 +52,8 @@ function(set_target_options _TARGET)
       LIST_OF_SANITIZERS)
 
     if(MSVC)
-      target_compile_options(${_TARGET} PUBLIC "/fsanitize=${LIST_OF_SANITIZERS} /Zi /INCREMENTAL=NO")
-      target_link_options(${_TARGET} PUBLIC "/INCREMENTAL=NO")
+      target_compile_options(${_TARGET} PUBLIC "-fsanitize=${LIST_OF_SANITIZERS}" "/Zi")
+      target_link_options(${_TARGET} PUBLIC "-incremental:no")
     else()
       target_compile_options(${_TARGET} PUBLIC "-fsanitize=${LIST_OF_SANITIZERS}")
       target_link_options(${_TARGET} PUBLIC "-fsanitize=${LIST_OF_SANITIZERS}")
@@ -97,9 +98,9 @@ function(set_target_options _TARGET)
     get_target_property(SOURCES ${_TARGET} SOURCES)
     list(TRANSFORM SOURCES PREPEND "${CMAKE_CURRENT_SOURCE_DIR}/")
     add_custom_command(
-      _TARGET ${_TARGET}
+      TARGET ${_TARGET}
       PRE_BUILD
-      COMMAND ${CLANG_FORMAT} ARGS --Werror --dry-run --verbose ${SOURCES})
+      COMMAND ${CLANG_FORMAT} ARGS "--Werror" "--dry-run" "--verbose" ${SOURCES})
   endif()
 
   if(MYPROJECT_ENABLE_IWYU AND IWYU)

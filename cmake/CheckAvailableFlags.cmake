@@ -1,13 +1,14 @@
 include_guard()
 
 include(CheckCXXCompilerFlag)
+include(CheckLinkerFlag)
 
 macro(check_cl_flags)
   # Sanitizer
-  check_cxx_compiler_flag("/fsanitize=address" HAVE_ADDRESS_SANITIZER)
+  check_cxx_compiler_flag("-fsanitize=address" HAVE_ADDRESS_SANITIZER)
 
   # Profiling
-  check_cxx_compiler_flag("/PROFILE" HAVE_PROFILER)
+  check_linker_flag(CXX "/PROFILE" HAVE_PROFILER)
 endmacro(check_cl_flags)
 
 macro(check_gnu_flags)
