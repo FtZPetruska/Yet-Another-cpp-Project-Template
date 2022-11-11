@@ -22,6 +22,10 @@ function(setup_project)
   # Load a function for setting target options
   include("AddTargetWarnings")
   set_available_warnings()
+
+  # Printout the options
+  include("PrintOptions")
+  print_options_summary()
 endfunction(setup_project)
 
 function(apply_options_to_target target)

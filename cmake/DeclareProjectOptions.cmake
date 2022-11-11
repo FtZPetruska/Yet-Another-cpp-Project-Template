@@ -71,5 +71,3 @@ if(NOT CMAKE_BUILD_TYPE)
              "MinSizeRel"
              "RelWithDebInfo")
 endif()
-
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
