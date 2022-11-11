@@ -23,16 +23,26 @@ jobs:
         exclude:
           - runner: ubuntu-latest
             compiler: apple-clang
+          - runner: macos-latest
+            compiler: gcc
 
     steps:
       - name: Checkout project
         uses: actions/checkout@v3
+
+      - name: Setup brew on Linux
+        if: matrix.runner == 'ubuntu-latest'
+        run: |
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          echo $PATH > $GITHUB_PATH
+          echo "$(brew --prefix binutils)/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: |
           brew install cmake \
                        ninja \
                        gcc \
+                       binutils \
                        llvm \
                        clang-format \
                        iwyu \
@@ -40,7 +50,7 @@ jobs:
           echo "$(brew --prefix llvm)/bin" >> $GITHUB_PATH
 
       - name: Configure with GCC
-        if: matrix.compiler == "gcc"
+        if: matrix.compiler == 'gcc'
         run: |
           cmake -S . -B build -G Ninja \
             -DCMAKE_BUILD_TYPE="${{ matrix.build_type }}" \
@@ -48,11 +58,10 @@ jobs:
             -DCMAKE_CXX_COMPILER="$(brew --prefix gcc)/bin/g++-12" \
             -DMYPROJECT_ENABLE_CCACHE=ON \
             -DMYPROJECT_ENABLE_IWYU=ON \
-            -DMYPROJECT_ENABLE_CLANG_TIDY=ON \
             -DMYPROJECT_ENABLE_CLANG_FORMAT=ON
 
       - name: Configure with LLVM
-        if: matrix.compiler == "llvm"
+        if: matrix.compiler == 'llvm'
         run: |
           cmake -S . -B build -G Ninja \
             -DCMAKE_BUILD_TYPE="${{ matrix.build_type }}" \
@@ -64,7 +73,7 @@ jobs:
             -DMYPROJECT_ENABLE_CLANG_FORMAT=ON
 
       - name: Configure with Apple Clang
-        if: matrix.compiler == "apple-clang"
+        if: matrix.compiler == 'apple-clang'
         run: |
           cmake -S . -B build -G Ninja \
             -DCMAKE_BUILD_TYPE="${{ matrix.build_type }}" \
@@ -84,7 +93,7 @@ jobs:
         working-directory: build
 
   windows:
-    name: "Windows -- ${{ matrix.toolchain }}/${{ matrix.build_type }}"
+    name: "Windows -- ${{ matrix.toolchain }}/${{ matrix.build_type }} (${{ matrix.architecture }})"
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -110,7 +119,7 @@ jobs:
             -A ${{ matrix.architecture }} `
             -DCMAKE_BUILD_TYPE="${{ matrix.build_type }}" `
             -DMYPROJECT_ENABLE_CLANG_TIDY=ON `
-            -DMYPROJECT_ENABLE_CLANG_FORMAT=ON `
+            -DMYPROJECT_ENABLE_CLANG_FORMAT=OFF `
             -DMYPROJECT_ENABLE_TEST=ON
 
       - name: Build project
