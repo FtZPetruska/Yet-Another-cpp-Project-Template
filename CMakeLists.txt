@@ -19,9 +19,9 @@ setup_project()
 
 set(MYPROJECT_PUBLIC_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/include")
 
-add_subdirectory(src)
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/src")
 
-if(MYPROJECT_ENABLE_TEST)
+if(MYPROJECT_ENABLE_TESTS)
   enable_testing()
-  add_subdirectory(test)
+  add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/test")
 endif()

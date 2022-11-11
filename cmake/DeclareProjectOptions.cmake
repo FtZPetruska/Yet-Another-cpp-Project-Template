@@ -56,7 +56,7 @@ if(IWYU)
   option(MYPROJECT_ENABLE_IWYU "Emable include-what-you-use during build" OFF)
 endif()
 
-option(MYPROJECT_ENABLE_TEST "Enable tests" ${MYPROJECT_IS_TOPLEVEL_PROJECT})
+option(MYPROJECT_ENABLE_TESTS "Enable tests" ${MYPROJECT_IS_TOPLEVEL_PROJECT})
 
 if(NOT CMAKE_BUILD_TYPE)
   message(STATUS "No build type specified, defaulting to 'Debug'")
