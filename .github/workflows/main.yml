@@ -27,6 +27,9 @@ jobs:
             compiler: gcc
 
     steps:
+      - name: Set VCPKG_ROOT
+        run: echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
+
       - name: Checkout project
         uses: actions/checkout@v3
 
@@ -112,6 +115,10 @@ jobs:
           - Win32
 
     steps:
+      - name: Set VCPKG_ROOT
+        shell: bash
+        run: echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
+
       - name: Checkout project
         uses: actions/checkout@v3
 
