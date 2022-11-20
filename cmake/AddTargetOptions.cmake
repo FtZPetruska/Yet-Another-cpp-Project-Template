@@ -91,7 +91,7 @@ function(set_target_options _TARGET)
   endif()
 
   if(MYPROJECT_ENABLE_CLANG_TIDY AND CLANG_TIDY)
-    set_target_properties(${_TARGET} PROPERTIES C_CLANG_TIDY ${CLANG_TIDY} CXX_CLANG_TIDY ${CLANG_TIDY})
+    set_target_properties(${_TARGET} PROPERTIES C_CLANG_TIDY ${CLANG_TIDY} CXX_CLANG_TIDY "${CLANG_TIDY};-extra-arg=-Wno-unknown-warning-option")
   endif()
 
   if(MYPROJECT_ENABLE_CLANG_FORMAT AND CLANG_FORMAT)
