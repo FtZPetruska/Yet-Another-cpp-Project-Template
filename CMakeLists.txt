@@ -5,7 +5,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/cmake/ProjectSetup.cmake")
 setup_dependencies()
 
 project(
-  yet_another_cpp_project_template
+  "Yet Another C++ Project Template"
   VERSION 0.1.0
   LANGUAGES C CXX)
 
