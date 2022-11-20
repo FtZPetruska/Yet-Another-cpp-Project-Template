@@ -96,28 +96,28 @@ cmake_dependent_option(
   MYPROJECT_ENABLE_CCACHE
   "Speedup builds with ccache"
   ON
-  "CCACHE"
+  "CCACHE_EXECUTABLE"
   OFF)
 
 cmake_dependent_option(
   MYPROJECT_ENABLE_CLANG_TIDY
   "Enable clang-tidy analysis during build"
   ${IS_DEBUG}
-  "CLANG_TIDY"
+  "CLANG_TIDY_EXECUTABLE"
   OFF)
 
 cmake_dependent_option(
   MYPROJECT_ENABLE_CLANG_FORMAT
   "Emable code format check during build"
   ${IS_DEBUG}
-  "CLANG_FORMAT"
+  "CLANG_FORMAT_EXECUTABLE"
   OFF)
 
 cmake_dependent_option(
   MYPROJECT_ENABLE_IWYU
   "Emable include-what-you-use during build"
   ${IS_DEBUG}
-  "IWYU"
+  "IWYU_EXECUTABLE"
   OFF)
 
 option(MYPROJECT_ENABLE_TESTS "Enable tests" ${MYPROJECT_IS_TOPLEVEL_PROJECT})
