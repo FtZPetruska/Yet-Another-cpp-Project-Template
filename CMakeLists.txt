@@ -5,7 +5,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/cmake/ProjectSetup.cmake")
 setup_vcpkg()
 
 project(
-  yet_naother_cpp_project_template
+  yet_another_cpp_project_template
   VERSION 0.1.0
   LANGUAGES C CXX)
 
