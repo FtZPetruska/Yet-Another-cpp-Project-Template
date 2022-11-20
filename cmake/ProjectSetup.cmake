@@ -7,6 +7,8 @@ macro(setup_vcpkg)
 endmacro(setup_vcpkg)
 
 function(setup_project)
+  include("Sanitizer")
+
   # Check which flags are supported
   include("CheckAvailableFlags")
 

@@ -4,20 +4,14 @@ include(CheckCXXCompilerFlag)
 include(CheckLinkerFlag)
 
 macro(check_cl_flags)
-  # Sanitizer
-  check_cxx_compiler_flag("-fsanitize=address" HAVE_ADDRESS_SANITIZER)
+  check_available_sanitizer()
 
   # Profiling
   check_linker_flag(CXX "/PROFILE" HAVE_PROFILER)
 endmacro(check_cl_flags)
 
 macro(check_gnu_flags)
-  # Sanitizers
-  check_cxx_compiler_flag("-fsanitize=address" HAVE_ADDRESS_SANITIZER)
-  check_cxx_compiler_flag("-fsanitize=thread" HAVE_THREAD_SANITIZER)
-  check_cxx_compiler_flag("-fsanitize=memory" HAVE_MEMORY_SANITIZER)
-  check_cxx_compiler_flag("-fsanitize=undefined" HAVE_UB_SANITIZER)
-  check_cxx_compiler_flag("-fsanitize=leak" HAVE_LEAK_SANITIZER)
+  check_available_sanitizer()
 
   # Native optimisations
   check_cxx_compiler_flag("-march=native" HAVE_NATIVE_OPTIMISATION)
