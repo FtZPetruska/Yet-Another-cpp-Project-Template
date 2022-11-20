@@ -5,9 +5,13 @@ if(CMAKE_TOOLCHAIN_FILE MATCHES "vcpkg.cmake")
   return()
 endif()
 
+if(CMAKE_TOOLCHAIN_FILE)
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${CMAKE_TOOLCHAIN_FILE}")
+endif()
+
 if(DEFINED ENV{VCPKG_ROOT})
   message(STATUS "VCPKG_ROOT is set -- $ENV{VCPKG_ROOT}")
-  list(APPEND CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
+  set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
   return()
 endif()
 
@@ -22,4 +26,4 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(vcpkg)
 
-list(APPEND CMAKE_TOOLCHAIN_FILE "${vcpkg_SOURCE_DIR}/scripts/buildsystems/vcpkg.cmake")
+set(CMAKE_TOOLCHAIN_FILE "${vcpkg_SOURCE_DIR}/scripts/buildsystems/vcpkg.cmake")
