@@ -3,14 +3,10 @@ include_guard()
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
 macro(setup_dependencies)
-  if(WIN32)
+  if(WIN32 OR CMAKE_TOOLCHAIN_FILE MATCHES "vcpkg.cmake")
     set(VCPKG_ENABLED ON)
   else()
-    string(
-      REGEX MATCH
-            "vcpkg.cmake"
-            VCPKG_ENABLED
-            "${CMAKE_TOOLCHAIN_FILE}")
+    set(VCPKG_ENABLED OFF)
   endif()
 
   option(MYPROJECT_USE_VCPKG "Manage dependencies with VCPKG. Can only be set on first Configuration" ${VCPKG_ENABLED})
