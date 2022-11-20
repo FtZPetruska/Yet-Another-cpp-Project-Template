@@ -54,6 +54,10 @@ function(setup_project)
   # Printout the options
   include("PrintOptions")
   print_options_summary()
+
+  # Generate Doxygen doc
+  include("Doxygen")
+  run_doxygen_if_available()
 endfunction(setup_project)
 
 function(apply_options_to_target target)

@@ -51,7 +51,9 @@ jobs:
                        iwyu \
                        ccache \
                        spdlog \
-                       catch2
+                       catch2 \
+                       doxygen \
+                       graphviz
           echo "$(brew --prefix llvm)/bin" >> $GITHUB_PATH
 
       - name: Configure with GCC
@@ -92,7 +94,8 @@ jobs:
             -DMYPROJECT_ENABLE_IWYU=ON \
             -DMYPROJECT_ENABLE_CLANG_TIDY=ON \
             -DMYPROJECT_ENABLE_CLANG_FORMAT=ON \
-            -DMYPROJECT_ENABLE_TESTS=ON
+            -DMYPROJECT_ENABLE_TESTS=ON \
+            -DMYPROJECT_ENABLE_DOXYGEN=ON
 
       - name: Build project
         run: cmake --build build --verbose

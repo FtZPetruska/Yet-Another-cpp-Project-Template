@@ -120,6 +120,13 @@ cmake_dependent_option(
   "IWYU_EXECUTABLE"
   OFF)
 
+cmake_dependent_option(
+  MYPROJECT_ENABLE_DOXYGEN
+  "Enable doxygen documentation generation"
+  ON
+  "DOXYGEN_FOUND"
+  OFF)
+
 option(MYPROJECT_ENABLE_TESTS "Enable tests" ${MYPROJECT_IS_TOPLEVEL_PROJECT})
 
 unset(IS_DEBUG)

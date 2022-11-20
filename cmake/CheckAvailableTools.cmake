@@ -27,3 +27,5 @@ if(IWYU_EXECUTABLE)
 else()
   message(STATUS "include-what-you-use not found")
 endif()
+
+find_package(Doxygen OPTIONAL_COMPONENTS dot)
