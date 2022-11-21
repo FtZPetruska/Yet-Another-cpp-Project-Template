@@ -45,7 +45,7 @@ function(set_target_options _TARGET)
 
   if(MYPROJECT_ENABLE_CLANG_TIDY AND CLANG_TIDY_EXECUTABLE)
     set_target_properties(
-      ${_TARGET} PROPERTIES C_CLANG_TIDY ${CLANG_TIDY_EXECUTABLE}
+      ${_TARGET} PROPERTIES C_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE};-extra-arg=-Wno-unknown-warning-option"
                             CXX_CLANG_TIDY "${CLANG_TIDY_EXECUTABLE};-extra-arg=-Wno-unknown-warning-option")
   endif()
 
